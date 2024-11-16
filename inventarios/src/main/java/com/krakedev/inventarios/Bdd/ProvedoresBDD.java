@@ -33,11 +33,13 @@ public class ProvedoresBDD {
 				while(rs.next()) {
 					String identificador=rs.getString("identificador");
 					String tipoDocumento=rs.getString("tipo_de_documento");
+					String TDdescripcion=rs.getString("descripcion");
 					String nombre=rs.getString("nombre");
 					String telefono=rs.getString("telefono");
 					String correo=rs.getString("correo");
 					String direccion=rs.getString("direccion");
-					cl= new Proveedores(identificador,tipoDocumento,nombre,telefono,correo,direccion);
+					TipoDocumentos TD= new TipoDocumentos(tipoDocumento,TDdescripcion);
+					cl= new Proveedores(identificador,TD,nombre,telefono,correo,direccion);
 					Proveedores.add(cl);
 				}
 			
