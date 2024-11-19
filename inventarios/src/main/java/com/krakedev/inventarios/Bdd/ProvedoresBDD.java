@@ -86,5 +86,42 @@ public  ArrayList<TipoDocumentos> recuperarTodos() throws KrakedevException{
 		return TD;
 	}
 
+public void insertar(Proveedores proveedor) throws KrakedevException{
+	
+	Connection con= null;
+	PreparedStatement ps= null;
 
+	
+	try {
+		con= ConexionBDD.obtenerConexion();
+		ps= con.prepareStatement("insert into proveedores(identificador, tipo_de_documento, nombre, telefono, correo, direccion)"
+				
+				+ " values(?, ?, ?, ?, ?, ?) ");
+		
+		ps.setString(1, proveedor.getIdentificador());
+		ps.setString(2, proveedor.getTipoDocumento().getCodigo());
+		ps.setString(3, proveedor.getNombre());
+		ps.setString(4, proveedor.getTelefono());
+		ps.setString(5, proveedor.getCorreo());
+		ps.setString(6, proveedor.getDireccion());
+		
+		
+	
+		ps.executeUpdate();
+		
+
+		
+	}catch (KrakedevException e) {
+		e.printStackTrace();
+		throw e;
+	}catch (SQLException e) {
+		e.printStackTrace();
+		throw new KrakedevException("error al ingresar un proveedor" + e.getMessage());
+	}
+	
+	
 }
+}
+
+
+
