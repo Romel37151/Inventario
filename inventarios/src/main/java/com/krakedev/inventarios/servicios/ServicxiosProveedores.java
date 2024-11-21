@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.krakedev.inventarios.Bdd.ProvedoresBDD;
+import com.krakedev.inventarios.entidades.Producto;
 import com.krakedev.inventarios.entidades.Proveedores;
 import com.krakedev.inventarios.entidades.TipoDocumentos;
 import com.krakedev.inventarios.exception.KrakedevException;
@@ -22,7 +23,7 @@ public class ServicxiosProveedores {
 	@Path("buscar/{subParam}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response buscar(@PathParam("subParam") String sub) {
+	public Response buscarP(@PathParam("subParam") String sub) {
 		ProvedoresBDD con = new ProvedoresBDD();
 
 		ArrayList<Proveedores> RM = null;
@@ -69,5 +70,36 @@ public class ServicxiosProveedores {
 			return Response.serverError().build();
 		}
 	}
+	
+	@Path("buscar/{sub}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscar(@PathParam("sub") String subcadena) {
+		ProvedoresBDD prod = new ProvedoresBDD();
+		ArrayList<Producto> productos = null;
+		try {
+			productos = prod.buscarProducto(subcadena);
+			return Response.ok(productos).build();
+		} catch (KrakedevException e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
+
+	}
+
+	@Path("crear")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response insertar(Producto producto) {
+		ProvedoresBDD prod = new ProvedoresBDD();
+		try {
+			prod.crearProducto(producto);
+			return Response.ok().build();
+		} catch (KrakedevException e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
+	}
+
 	
 }
