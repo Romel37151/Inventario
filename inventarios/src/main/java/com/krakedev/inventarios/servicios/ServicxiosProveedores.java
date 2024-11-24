@@ -71,7 +71,7 @@ public class ServicxiosProveedores {
 		}
 	}
 	
-	@Path("buscar/{sub}")
+	@Path("buscarProducto/{sub}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscar(@PathParam("sub") String subcadena) {
@@ -87,7 +87,7 @@ public class ServicxiosProveedores {
 
 	}
 
-	@Path("crear")
+	@Path("crearProducto")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response insertar(Producto producto) {

@@ -173,8 +173,6 @@ public ArrayList<Producto> buscarProducto(String codProd) throws KrakedevExcepti
 	}
 	return productos;
 }
-
-// Método crear producto
 public void crearProducto(Producto producto) throws KrakedevException{
 	Connection con = null;
 	PreparedStatement ps = null;
